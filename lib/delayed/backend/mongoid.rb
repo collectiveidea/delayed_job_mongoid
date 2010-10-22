@@ -22,7 +22,7 @@ module Delayed
         end
 
         def self.after_fork
-          ::Mongoid.master.connection.connect_to_master
+          ::Mongoid.master.connection.connect
         end
         
         def self.db_time_now
