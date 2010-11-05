@@ -10,11 +10,13 @@ module Delayed
         field :handler,     :type=> String
         field :run_at,      :type=> Time
         field :locked_at,   :type=> Time
-        field :locked_by,   :type=> String, :index => true
+        field :locked_by,   :type=> String
         field :failed_at,   :type=> Time
         field :last_error,  :type=> String
       
       
+        index :locked_by
+
         before_save :set_default_run_at
         
         def self.before_fork
