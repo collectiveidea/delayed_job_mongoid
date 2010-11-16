@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/collectiveidea/delayed_job.git
-  revision: 5cbc4b33f8d26ceb234f530b9288e4244afecc15
+  revision: fcca64c20c60b5d93d2ca7ad416ae30e33e588e7
   specs:
-    delayed_job (2.1.0)
+    delayed_job (2.1.1)
       activesupport (~> 3.0)
       daemons
 
@@ -19,19 +19,17 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.0.1)
-      activesupport (= 3.0.1)
+    activemodel (3.0.2)
+      activesupport (= 3.0.2)
       builder (~> 2.1.2)
       i18n (~> 0.4.1)
-    activesupport (3.0.1)
+    activesupport (3.0.2)
     bson (1.1.2)
     bson_ext (1.1.2)
     builder (2.1.2)
-    columnize (0.3.2)
     daemons (1.1.0)
     diff-lcs (1.1.2)
     i18n (0.4.2)
-    linecache (0.43)
     mongo (1.1.2)
       bson (>= 1.1.1)
     rake (0.8.7)
