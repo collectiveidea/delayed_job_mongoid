@@ -30,6 +30,34 @@ module Delayed
           Time.now.utc
         end
 
+        # Reserves this job for the worker. Overrides Delayed::Backend::Base#reserve
+        #--
+        # Note: 
+        # This method no longer calls find_available and lock_exclusively!
+        # Instead, it uses Mongo's findAndModify operation to atomically pick and lock one job from from the table. 
+        # Conditions were based on those in find_available.
+        # findAndModify is not yet available directly thru Mongoid so go down to the Mongo Ruby driver instead.
+        #++
+        def self.reserve(worker, max_run_time = Worker.max_run_time)
+          right_now = db_time_now
+
+          conditions = {:run_at  => {"$lte" => right_now}, :failed_at => nil}
+          (conditions[:priority] ||= {})['$gte'] = Worker.min_priority.to_i if Worker.min_priority
+          (conditions[:priority] ||= {})['$lte'] = Worker.max_priority.to_i if Worker.max_priority
+
+          where = "this.locked_by == '#{worker.name}' || this.locked_at == null || this.locked_at < #{make_date(right_now - max_run_time)}"
+          conditions.merge!('$where' => where)
+
+          begin
+            result = self.db.collection(self.collection.name).find_and_modify(:query => conditions, :sort => [['locked_by', -1], ['priority', 1], ['run_at', 1]], :update => {"$set" => {:locked_at => right_now, :locked_by => worker.name}})
+            # Return result as a Mongoid document. 
+            # When Mongoid starts supporting findAndModify, this extra step should no longer be necessary.
+            self.find(:first, :conditions => {:_id => result["_id"]})
+          rescue
+            nil
+          end
+        end
+
         def self.find_available(worker_name, limit = 5, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
