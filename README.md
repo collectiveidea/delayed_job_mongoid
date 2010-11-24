@@ -4,10 +4,10 @@
 
 Add the gems to your Gemfile:
 
-    gem 'delayed_job', '2.1.0.pre2'
-    gem 'delayed_job_mongoid', '1.0.0.rc'
+    gem 'delayed_job'
+    gem 'delayed_job_mongoid'
 
-Create the indexes:
+After running `bundle install`, create the indexes (and don't forget to do this on your production database):
 
     script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
 
