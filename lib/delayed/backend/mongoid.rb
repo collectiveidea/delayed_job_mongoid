@@ -14,7 +14,7 @@ module Delayed
         field :failed_at,   :type=> Time
         field :last_error,  :type=> String
 
-        index :locked_by
+        index ([[:locked_by, -1], [:priority, 1], [:run_at, 1]])
 
         before_save :set_default_run_at
 
