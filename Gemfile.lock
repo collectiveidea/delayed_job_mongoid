@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/collectiveidea/delayed_job.git
-  revision: fcca64c20c60b5d93d2ca7ad416ae30e33e588e7
+  revision: f4fc9a2e87d83634c6c32a429de689927fa9f544
   specs:
     delayed_job (2.1.1)
       activesupport (~> 3.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 78b1dd32a83a6616176cc95ca20b770be143f566
+  revision: aed53e4e06f5f9db6915f5271be5dac5e46d7b36
   specs:
     mongoid (2.0.0.beta.20)
       activemodel (~> 3.0)
@@ -19,11 +19,11 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.0.2)
-      activesupport (= 3.0.2)
+    activemodel (3.0.3)
+      activesupport (= 3.0.3)
       builder (~> 2.1.2)
-      i18n (~> 0.4.1)
-    activesupport (3.0.2)
+      i18n (~> 0.4)
+    activesupport (3.0.3)
     bson (1.1.2)
     bson_ext (1.1.2)
     builder (2.1.2)
