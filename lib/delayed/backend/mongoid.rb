@@ -50,8 +50,8 @@ module Delayed
             # Return result as a Mongoid document.
             # When Mongoid starts supporting findAndModify, this extra step should no longer be necessary.
             self.find(:first, :conditions => {:_id => result["_id"]})
-          rescue Mongo::OperationFailure => bang
-            bang.message =~ /'findandmodify' failed:.*No matching object found.*/ ? nil : raise
+          rescue Mongo::OperationFailure
+            nil # no jobs available
           end
         end
 
