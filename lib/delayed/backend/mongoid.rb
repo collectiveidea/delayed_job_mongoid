@@ -42,11 +42,19 @@ module Delayed
           (conditions[:priority] ||= {})['$gte'] = Worker.min_priority.to_i if Worker.min_priority
           (conditions[:priority] ||= {})['$lte'] = Worker.max_priority.to_i if Worker.max_priority
 
-          where = "this.locked_by == '#{worker.name}' || this.locked_at == null || this.locked_at < #{make_date(right_now - max_run_time)}"
-          conditions.merge!('$where' => where)
+          conditions['$or'] = [
+            { :locked_by => worker.name },
+            { :locked_at => nil },
+            { :locked_at => { '$lt' => (right_now - max_run_time) }}
+          ]
 
           begin
-            result = self.db.collection(self.collection.name).find_and_modify(:query => conditions, :sort => [['locked_by', -1], ['priority', 1], ['run_at', 1]], :update => {"$set" => {:locked_at => right_now, :locked_by => worker.name}})
+            result = self.db.collection(self.collection.name).find_and_modify(
+              :query  => conditions,
+              :sort   => [['locked_by', -1], ['priority', 1], ['run_at', 1]],
+              :update => {"$set" => {:locked_at => right_now, :locked_by => worker.name}}
+            )
+
             # Return result as a Mongoid document.
             # When Mongoid starts supporting findAndModify, this extra step should no longer be necessary.
             self.find(:first, :conditions => {:_id => result["_id"]})
@@ -60,15 +68,6 @@ module Delayed
           self.collection.update({:locked_by => worker_name}, {"$set" => {:locked_at => nil, :locked_by => nil}}, :multi => true)
         end
 
-      private
-
-        def self.make_date(date_or_seconds)
-        "new Date(#{date_or_seconds.to_f * 1000})"
-        end
-
-        def make_date(date)
-          self.class.make_date(date)
-        end
       end
     end
   end
