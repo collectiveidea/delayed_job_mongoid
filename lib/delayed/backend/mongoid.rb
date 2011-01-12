@@ -42,11 +42,16 @@ module Delayed
           (conditions[:priority] ||= {})['$gte'] = Worker.min_priority.to_i if Worker.min_priority
           (conditions[:priority] ||= {})['$lte'] = Worker.max_priority.to_i if Worker.max_priority
 
-          conditions['$or'] = [
-            { :locked_by => worker.name },
-            { :locked_at => nil },
-            { :locked_at => { '$lt' => (right_now - max_run_time) }}
-          ]
+          if ::Mongoid.master.connection.server_version < '1.5.3'
+            lock_time = "new Date(#{(right_now - max_run_time).to_f * 1000})"
+            conditions['$where'] = "this.locked_by == '#{worker.name}' || this.locked_at == null || this.locked_at < #{lock_time}"
+          else
+            conditions['$or'] = [
+              { :locked_by => worker.name },
+              { :locked_at => nil },
+              { :locked_at => { '$lt' => (right_now - max_run_time) }}
+            ]
+          end
 
           begin
             result = self.db.collection(self.collection.name).find_and_modify(
