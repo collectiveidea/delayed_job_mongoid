@@ -1,18 +1,18 @@
 GIT
   remote: git://github.com/collectiveidea/delayed_job.git
-  revision: f4fc9a2e87d83634c6c32a429de689927fa9f544
+  revision: 6c11015334aae131737d08e4888ed2f84a161623
   specs:
-    delayed_job (2.1.1)
+    delayed_job (2.1.2)
       activesupport (~> 3.0)
       daemons
 
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: aed53e4e06f5f9db6915f5271be5dac5e46d7b36
+  revision: 74ef71b2e16f2b9556eedbf628452663c4246fa0
   specs:
-    mongoid (2.0.0.beta.20)
+    mongoid (2.0.0.rc.6)
       activemodel (~> 3.0)
-      mongo (~> 1.1)
+      mongo (~> 1.2)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
@@ -24,24 +24,24 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.4)
     activesupport (3.0.3)
-    bson (1.1.2)
-    bson_ext (1.1.2)
+    bson (1.2.0)
+    bson_ext (1.2.0)
     builder (2.1.2)
     daemons (1.1.0)
     diff-lcs (1.1.2)
-    i18n (0.4.2)
-    mongo (1.1.2)
-      bson (>= 1.1.1)
+    i18n (0.5.0)
+    mongo (1.2.0)
+      bson (>= 1.2.0)
     rake (0.8.7)
-    rspec (2.1.0)
-      rspec-core (~> 2.1.0)
-      rspec-expectations (~> 2.1.0)
-      rspec-mocks (~> 2.1.0)
-    rspec-core (2.1.0)
-    rspec-expectations (2.1.0)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.1.0)
-    tzinfo (0.3.23)
+    rspec-mocks (2.4.0)
+    tzinfo (0.3.24)
     will_paginate (3.0.pre2)
 
 PLATFORMS
