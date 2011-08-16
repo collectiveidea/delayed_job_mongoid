@@ -3,14 +3,14 @@ Mongoid::Document.class_eval do
 
   def self.yaml_new(klass, tag, val)
     begin
-      klass.find(val['attributes']['_id'])
+      klass.find(val['_id'])
     rescue Mongoid::Errors::DocumentNotFound
       raise Delayed::DeserializationError
     end
   end
 
   def to_yaml_properties
-    ['@attributes']
+    ['@_id']
   end
 end
 
