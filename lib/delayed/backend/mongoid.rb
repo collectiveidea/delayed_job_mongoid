@@ -55,6 +55,9 @@ module Delayed
               :update => {"$set" => {:locked_at => right_now, :locked_by => worker.name}}
             )
 
+            # As of Mongo 2.0, findAndModify will return a nil result for no match.
+            return nil if result.nil?
+            
             # Return result as a Mongoid document.
             # When Mongoid starts supporting findAndModify, this extra step should no longer be necessary.
             self.find(:first, :conditions => {:_id => result["_id"]})
