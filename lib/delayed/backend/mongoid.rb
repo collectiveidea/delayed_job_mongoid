@@ -39,9 +39,7 @@ module Delayed
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
-          conditions = {:run_at  => {"$lte" => right_now}, :failed_at => nil}
-          (conditions[:priority] ||= {})['$gte'] = Worker.min_priority.to_i if Worker.min_priority
-          (conditions[:priority] ||= {})['$lte'] = Worker.max_priority.to_i if Worker.max_priority
+          conditions = {:failed_at => nil}
 
           conditions['$or'] = [
             { :locked_by => worker.name },
@@ -52,7 +50,6 @@ module Delayed
           begin
             result = self.db.collection(self.collection.name).find_and_modify(
               :query  => conditions,
-              :sort   => [['locked_by', -1], ['priority', 1], ['run_at', 1]],
               :update => {"$set" => {:locked_at => right_now, :locked_by => worker.name}}
             )
 
