@@ -6,14 +6,14 @@ module Delayed
         include ::Mongoid::Document
         include ::Mongoid::Timestamps
         include Delayed::Backend::Base
-        field :priority,    :type=> Integer, :default => 0
-        field :attempts,    :type=> Integer, :default => 0
-        field :handler,     :type=> String
-        field :run_at,      :type=> Time
-        field :locked_at,   :type=> Time
-        field :locked_by,   :type=> String
-        field :failed_at,   :type=> Time
-        field :last_error,  :type=> String
+        field :priority,    :type => Integer, :default => 0
+        field :attempts,    :type => Integer, :default => 0
+        field :handler,     :type => String
+        field :run_at,      :type => Time
+        field :locked_at,   :type => Time
+        field :locked_by,   :type => String
+        field :failed_at,   :type => Time
+        field :last_error,  :type => String
         field :queue,       :type => String
 
         index ([[:locked_by, -1], [:priority, 1], [:run_at, 1]])
