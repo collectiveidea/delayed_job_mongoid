@@ -70,6 +70,10 @@ module Delayed
           self.collection.update({:locked_by => worker_name}, {"$set" => {:locked_at => nil, :locked_by => nil}}, :multi => true)
         end
 
+        def reload(*args)
+          reset
+          super
+        end
       end
     end
   end
