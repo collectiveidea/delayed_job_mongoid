@@ -14,6 +14,7 @@ module Delayed
         field :locked_by,   :type=> String
         field :failed_at,   :type=> Time
         field :last_error,  :type=> String
+        field :queue,       :type => String
 
         index ([[:locked_by, -1], [:priority, 1], [:run_at, 1]])
 
