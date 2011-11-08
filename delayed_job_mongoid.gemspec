@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.name              = 'delayed_job_mongoid'
   s.summary           = "Mongoid backend for delayed_job"
-  s.version           = '1.0.4'
+  s.version           = '1.0.5'
   s.authors           = ['Chris Gaffney', 'Brandon Keepers']
   s.date              = Date.today.to_s
   s.email             = ['chris@collectiveidea.com', 'brandon@opensoul.com']
