@@ -10,6 +10,7 @@ module Delayed
         include ::Mongoid::Document
         include ::Mongoid::Timestamps
         include Delayed::Backend::Base
+
         field :priority,    :type => Integer, :default => 0
         field :attempts,    :type => Integer, :default => 0
         field :handler,     :type => String
@@ -49,7 +50,7 @@ module Delayed
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
 
           criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
-            "$set" => {:locked_at => right_now, :locked_by => worker.name}
+            {"$set" => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
           )
         end
 
