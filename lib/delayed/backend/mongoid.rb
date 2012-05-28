@@ -41,8 +41,8 @@ module Delayed
             { :locked_at => { '$lt' => (right_now - max_run_time) }}
           )
 
-          criteria = criteria.where(:priority => {"$gte" => Worker.min_priority.to_i}) if Worker.min_priority
-          criteria = criteria.where(:priority => {"$lte" => Worker.max_priority.to_i}) if Worker.max_priority
+          criteria = criteria.gte(:priority => Worker.min_priority.to_i) if Worker.min_priority
+          criteria = criteria.lte(:priority => Worker.max_priority.to_i) if Worker.max_priority
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
 
           criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
