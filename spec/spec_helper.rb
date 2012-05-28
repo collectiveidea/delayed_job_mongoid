@@ -7,7 +7,7 @@ require 'delayed_job_mongoid'
 require 'delayed/backend/shared_spec'
 
 Mongoid.configure do |config|
-  config.master = config.master = Mongo::Connection.new.db('dl_spec')
+  config.connect_to("dl_spec")
 end
 
 class Story
