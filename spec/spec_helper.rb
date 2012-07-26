@@ -1,3 +1,10 @@
+unless ENV['CI']
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter 'spec'
+  end
+end
+
 require 'rspec'
 require 'delayed_job_mongoid'
 require 'delayed/backend/shared_spec'
