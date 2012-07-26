@@ -1,4 +1,7 @@
 # encoding: utf-8
+require 'delayed_job'
+require 'mongoid'
+
 if YAML.parser.class.name =~ /syck/i
   Mongoid::Document.class_eval do
     yaml_as "tag:ruby.yaml.org,2002:Mongoid"

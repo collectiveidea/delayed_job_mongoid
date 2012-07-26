@@ -1,4 +1,8 @@
 # encoding: utf-8
+require 'delayed_job'
+require 'mongo'
+require 'mongoid'
+
 module Delayed
   module Backend
     module Mongoid
