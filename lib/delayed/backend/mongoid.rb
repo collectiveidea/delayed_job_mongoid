@@ -20,7 +20,7 @@ module Delayed
         field :last_error,  :type => String
         field :queue,       :type => String
 
-        if Mongoid::VERSION.to_f >= 3
+        if ::Mongoid::VERSION.to_f >= 3
           index({:locked_by => -1, :priority => 1, :run_at => 1})
         else
           index([[:locked_by, -1], [:priority, 1], [:run_at, 1]])
