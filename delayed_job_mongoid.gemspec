@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.require_paths     = ['lib']
   s.test_files        = Dir.glob('spec/**/*')
 
-  s.add_runtime_dependency      'mongo',        '~> 1.6'
   s.add_runtime_dependency      'mongoid',      '~> 3.0'
   s.add_runtime_dependency      'delayed_job',  '~> 3.0'
   s.add_development_dependency  'rspec',        '>= 2.0'

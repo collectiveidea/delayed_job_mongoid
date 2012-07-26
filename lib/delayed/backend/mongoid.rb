@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'delayed_job'
-require 'mongo'
 require 'mongoid'
 
 module Delayed
@@ -32,12 +31,12 @@ module Delayed
         # Reserves this job for the worker.
         #
         # Uses Mongo's findAndModify operation to atomically pick and lock one
-        # job from from the collection. 
+        # job from from the collection.
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
           criteria = self.where(
-            :run_at => {"$lte" => right_now}, 
+            :run_at => {"$lte" => right_now},
             :failed_at => nil
           ).any_of(
             { :locked_by => worker.name },
