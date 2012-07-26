@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency      'mongo',        '~> 1.6'
   s.add_runtime_dependency      'mongoid',      '>= 2.0'
-  s.add_runtime_dependency      'delayed_job',  '~> 3.0.0'
+  s.add_runtime_dependency      'delayed_job',  '~> 3.0'
   s.add_development_dependency  'rspec',        '>= 2.0'
 end
 
