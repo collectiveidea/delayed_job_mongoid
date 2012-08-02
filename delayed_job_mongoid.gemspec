@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.name              = 'delayed_job_mongoid'
   s.summary           = "Mongoid backend for delayed_job"
-  s.version           = '1.1.0'
+  s.version           = '2.0.0'
   s.authors           = ['Chris Gaffney', 'Brandon Keepers']
   s.email             = ['chris@collectiveidea.com', 'brandon@opensoul.com']
   s.extra_rdoc_files  = ["LICENSE", "README.md"]
