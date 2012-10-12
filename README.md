@@ -23,5 +23,9 @@ on your production database):
 
     script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
 
+To generate script/delayed_job:
+
+    rails generate delayed_job
+
 That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as
 normal.
