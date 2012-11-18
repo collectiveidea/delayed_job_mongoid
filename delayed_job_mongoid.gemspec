@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files  = ["LICENSE", "README.md"]
   s.files             = Dir.glob("{lib,spec}/**/*") + %w[LICENSE README.md]
   s.homepage          = 'http://github.com/collectiveidea/delayed_job_mongoid'
+  s.licenses          = ['MIT']
   s.rdoc_options      = ['--charset=UTF-8']
   s.require_paths     = ['lib']
   s.test_files        = Dir.glob('spec/**/*')
