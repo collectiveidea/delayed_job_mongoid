@@ -4,7 +4,7 @@ gem 'rake'
 
 group :test do
   gem 'rspec', '>= 2.11'
-  gem 'simplecov'
+  gem 'simplecov', :require => false
 end
 
 gemspec
