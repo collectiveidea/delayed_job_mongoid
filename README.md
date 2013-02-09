@@ -1,7 +1,7 @@
 # delayed_job Mongoid backend
 [![Build Status](https://secure.travis-ci.org/collectiveidea/delayed_job_mongoid.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/collectiveidea/delayed_job_mongoid.png?travis)][gemnasium]
-[![Code Climate](https://codeclimate.com/badge.png)][codeclimate]
+[![Code Climate](https://codeclimate.com/github/collectiveidea/delayed_job_mongoid.png)][codeclimate]
 
 [travis]: http://travis-ci.org/collectiveidea/delayed_job_mongoid
 [gemnasium]: https://gemnasium.com/collectiveidea/delayed_job_mongoid
