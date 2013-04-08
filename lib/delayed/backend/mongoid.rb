@@ -67,8 +67,10 @@ module Delayed
             )
 
             # Return result as a Mongoid document.
-            # When Mongoid starts supporting findAndModify, this extra step should no longer be necessary.
-            self.find(:first, :conditions => {:_id => result["_id"]}) unless result.nil?
+            new.tap do |job|
+              job.new_record = false
+              job.assign_attributes(result)
+            end unless result.nil?
           rescue Mongo::OperationFailure
             nil # no jobs available
           end
