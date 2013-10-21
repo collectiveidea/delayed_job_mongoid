@@ -6,3 +6,6 @@ rvm:
   - 2.0.0
 services:
   - mongodb
+env:
+  - MONGOID_VERSION=3
+  - MONGOID_VERSION=4
