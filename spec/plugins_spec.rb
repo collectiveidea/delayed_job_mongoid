@@ -15,7 +15,7 @@ if Delayed::Backend::Mongoid.mongoid3?
       Delayed::Worker.reset
     end
     it "clears mongoid identity map" do
-      Mongoid::IdentityMap.should_receive(:clear).once
+      expect(Mongoid::IdentityMap).to receive(:clear).once
       job = described_class.enqueue SimpleJob.new, priority: 5
       worker.work_off
     end

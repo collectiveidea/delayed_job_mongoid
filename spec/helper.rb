@@ -11,6 +11,12 @@ require 'rspec'
 require 'delayed_job_mongoid'
 require 'delayed/backend/shared_spec'
 
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+end
+
 Mongoid.configure do |config|
   config.connect_to("dl_spec")
 end
