@@ -18,9 +18,9 @@ else
 end
 
 platforms :rbx do
+  gem 'json'
   gem 'rubinius-coverage'
   gem 'rubysl'
-  gem 'rubysl-json'
 end
 
 gemspec
