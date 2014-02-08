@@ -62,6 +62,12 @@ module Delayed
           reset
           super
         end
+
+        # Hook method that is called after a new worker is forked
+        def self.after_fork
+          # to avoid `failed with error "unauthorized"` errors in Mongoid 4.0.alpha2
+          ::Mongoid.default_session.disconnect
+        end
       end
       def self.mongoid3?
         ::Mongoid.const_defined? :Observer # deprecated in Mongoid 4.x
