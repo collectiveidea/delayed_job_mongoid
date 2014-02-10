@@ -17,10 +17,4 @@ else
   gem 'mongoid', version
 end
 
-platforms :rbx do
-  gem 'json'
-  gem 'rubinius-coverage'
-  gem 'rubysl'
-end
-
 gemspec
