@@ -1,4 +1,7 @@
 language: ruby
+env:
+  - MONGOID_VERSION=3
+  - MONGOID_VERSION=4
 rvm:
   - 1.9.3
   - 2.0.0
@@ -14,8 +17,7 @@ matrix:
   allow_failures:
     - rvm: jruby-head
     - rvm: ruby-head
+    - rvm: rbx-2
+      env: MONGOID_VERSION=4
 services:
   - mongodb
-env:
-  - MONGOID_VERSION=3
-  - MONGOID_VERSION=4
