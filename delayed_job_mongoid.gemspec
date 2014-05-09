@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'delayed_job', ['>= 3.0', '< 5']
@@ -14,5 +14,5 @@ Gem::Specification.new do |spec|
   spec.require_paths   = ['lib']
   spec.summary         = 'Mongoid backend for delayed_job'
   spec.test_files      = Dir.glob('spec/**/*')
-  spec.version         = '2.0.0'
+  spec.version         = '2.1.0'
 end
