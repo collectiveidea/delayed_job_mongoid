@@ -18,15 +18,20 @@ RSpec.configure do |config|
 end
 
 Mongoid.configure do |config|
-  config.connect_to("dl_spec")
+  config.connect_to('dl_spec')
 end
 
 class Story
   include ::Mongoid::Document
   field :text
 
-  def tell; text; end
-  def whatever(n, _); tell*n; end
+  def tell
+    text
+  end
+
+  def whatever(n, _)
+    tell * n
+  end
   def self.count; end
 
   handle_asynchronously :whatever

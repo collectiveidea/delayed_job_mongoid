@@ -7,7 +7,7 @@ if Delayed::Backend::Mongoid.mongoid3?
     module Plugins
       class ClearIdentityMap < Plugin
         callbacks do |lifecycle|
-          lifecycle.before(:invoke_job) do |worker, &block|
+          lifecycle.before(:invoke_job) do
             Mongoid::IdentityMap.clear
           end
         end

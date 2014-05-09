@@ -35,13 +35,13 @@ module Delayed
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
-          criteria = self.where(
-            :run_at => {"$lte" => right_now},
+          criteria = where(
+            :run_at => {'$lte' => right_now},
             :failed_at => nil
           ).any_of(
-            { :locked_by => worker.name },
-            { :locked_at => nil },
-            { :locked_at => { '$lt' => (right_now - max_run_time) }}
+            {:locked_by => worker.name},
+            {:locked_at => nil},
+            {:locked_at => {'$lt' => (right_now - max_run_time)}}
           )
 
           criteria = criteria.gte(:priority => Worker.min_priority.to_i) if Worker.min_priority
@@ -49,13 +49,13 @@ module Delayed
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
 
           criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
-            {"$set" => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
+            {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
           )
         end
 
         # When a worker is exiting, make sure we don't have any locked jobs.
         def self.clear_locks!(worker_name)
-          self.where(:locked_by => worker_name).update_all({:locked_at => nil, :locked_by => nil})
+          where(:locked_by => worker_name).update_all(:locked_at => nil, :locked_by => nil)
         end
 
         def reload(*args)
