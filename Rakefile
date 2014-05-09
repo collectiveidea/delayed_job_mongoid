@@ -20,4 +20,15 @@ rescue LoadError
   end
 end
 
-task :default => [:spec, :rubocop]
+require 'yardstick/rake/measurement'
+Yardstick::Rake::Measurement.new do |measurement|
+  measurement.output = 'measurement/report.txt'
+end
+
+require 'yardstick/rake/verify'
+Yardstick::Rake::Verify.new do |verify|
+  verify.require_exact_threshold = false
+  verify.threshold = 53.3
+end
+
+task :default => [:spec, :rubocop, :verify_measurements]

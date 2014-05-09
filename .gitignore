@@ -16,6 +16,7 @@ tmtags
 ## PROJECT::GENERAL
 Gemfile.lock
 coverage
+measurement
 rdoc
 pkg
 
