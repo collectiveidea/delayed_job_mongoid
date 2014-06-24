@@ -1,23 +1,22 @@
 language: ruby
 env:
-  - MONGOID_VERSION=3
-  - MONGOID_VERSION=4
+  global:
+    - JRUBY_OPTS="$JRUBY_OPTS --debug"
+  matrix:
+    - MONGOID_VERSION=3
+    - MONGOID_VERSION=4
 rvm:
   - 1.9.3
   - 2.0.0
   - 2.1
+  - jruby-19mode
+  - jruby-head
   - rbx-2
   - ruby-head
 matrix:
-  include:
-    - rvm: jruby-19mode
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
-    - rvm: jruby-head
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
   allow_failures:
     - rvm: jruby-head
     - rvm: ruby-head
-    - rvm: rbx-2
-      env: MONGOID_VERSION=4
+  fast_finish: true
 services:
   - mongodb
