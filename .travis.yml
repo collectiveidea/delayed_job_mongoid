@@ -21,3 +21,4 @@ matrix:
   fast_finish: true
 services:
   - mongodb
+sudo: false
