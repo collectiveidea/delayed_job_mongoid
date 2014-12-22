@@ -41,7 +41,7 @@ module Delayed
           ).any_of(
             {:locked_by => worker.name},
             {:locked_at => nil},
-            {:locked_at => {'$lt' => (right_now - max_run_time)}}
+            :locked_at => {'$lt' => (right_now - max_run_time)}
           )
 
           criteria = criteria.gte(:priority => Worker.min_priority.to_i) if Worker.min_priority

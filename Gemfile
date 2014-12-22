@@ -8,7 +8,7 @@ group :test do
   gem 'mime-types', '~> 1.25', :platforms => [:jruby, :ruby_18]
   gem 'rest-client', '~> 1.6.0', :platforms => [:jruby, :ruby_18]
   gem 'rspec', '>= 3'
-  gem 'rubocop', '>= 0.23'
+  gem 'rubocop', '>= 0.28'
   gem 'simplecov', '>= 0.9'
   gem 'yardstick'
 end

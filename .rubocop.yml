@@ -1,8 +1,5 @@
-AllCops:
-  Include:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'delayed_job_mongoid.gemspec'
+AbcSize:
+  Enabled: false
 
 # Avoid long parameter lists
 ParameterLists:
