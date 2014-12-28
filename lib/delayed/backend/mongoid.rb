@@ -51,6 +51,12 @@ module Delayed
           criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
             {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
           )
+        rescue Moped::Errors::OperationFailure => e
+          if e.details['errmsg'] == 'No matching object found'
+            nil
+          else
+            raise
+          end
         end
 
         # When a worker is exiting, make sure we don't have any locked jobs.
