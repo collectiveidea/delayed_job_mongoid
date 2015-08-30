@@ -18,6 +18,8 @@ when /4/
   gem 'mongoid', '~> 4.0'
 when /3/
   gem 'mongoid', '~> 3.1'
+when /5/
+  gem 'mongoid', github: "mongodb/mongoid"
 else
   gem 'mongoid', version
 end

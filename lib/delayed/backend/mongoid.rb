@@ -47,10 +47,17 @@ module Delayed
           criteria = criteria.gte(:priority => Worker.min_priority.to_i) if Worker.min_priority
           criteria = criteria.lte(:priority => Worker.max_priority.to_i) if Worker.max_priority
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
+          criteria = criteria.desc(:locked_by).asc(:priority).asc(:run_at)
 
-          criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
-            {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
-          )
+          if ::Mongoid::VERSION >= "5.0.0"
+            criteria.find_one_and_update(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :return_document => :after
+            )
+          else
+            criteria.find_and_modify(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
+            )
+          end
         end
 
         # When a worker is exiting, make sure we don't have any locked jobs.
