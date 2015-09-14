@@ -28,13 +28,33 @@ module Delayed
           Time.now.utc
         end
 
-        # Reserves this job for the worker.
+        # Reserves one job for the worker.
         #
-        # Uses Mongo's findAndModify operation to atomically pick and lock one
-        # job from from the collection.
+        # Atomically picks and locks one job from the collection.
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
+          criteria = reservation_criteria worker, right_now, max_run_time
+
+          if Gem::Version.create(::Mongoid::VERSION) >= Gem::Version.create('5.0.0')
+            criteria.find_one_and_update(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
+              :return_document => :after
+            )
+          else
+            criteria.find_and_modify(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
+              :new => true
+            )
+          end
+        end
+
+        # Mongo criteria matching all the jobs the worker can reserver
+        #
+        # Jobs are sorted by priority and run_at.
+        #
+        # @api private
+        def self.reservation_criteria(worker, right_now, max_run_time)
           criteria = where(
             :run_at => {'$lte' => right_now},
             :failed_at => nil
@@ -47,10 +67,9 @@ module Delayed
           criteria = criteria.gte(:priority => Worker.min_priority.to_i) if Worker.min_priority
           criteria = criteria.lte(:priority => Worker.max_priority.to_i) if Worker.max_priority
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
+          criteria = criteria.desc(:locked_by).asc(:priority).asc(:run_at)
 
-          criteria.desc(:locked_by).asc(:priority).asc(:run_at).find_and_modify(
-            {'$set' => {:locked_at => right_now, :locked_by => worker.name}}, :new => true
-          )
+          criteria
         end
 
         # When a worker is exiting, make sure we don't have any locked jobs.
@@ -65,8 +84,10 @@ module Delayed
 
         # Hook method that is called after a new worker is forked
         def self.after_fork
-          # to avoid `failed with error "unauthorized"` errors in Mongoid 4.0.alpha2
-          ::Mongoid.default_session.disconnect
+          if Gem::Version.create(::Mongoid::VERSION) < Gem::Version.create('5.0.0')
+            # to avoid `failed with error "unauthorized"` errors in Mongoid 4.0.alpha2
+            ::Mongoid.default_session.disconnect
+          end
         end
       end
       def self.mongoid3?
