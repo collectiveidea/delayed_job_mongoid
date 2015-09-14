@@ -6,6 +6,7 @@ env:
   matrix:
     - MONGOID_VERSION=3
     - MONGOID_VERSION=4
+    - MONGOID_VERSION=5
 rvm:
   - 1.9.3
   - 2.0.0
