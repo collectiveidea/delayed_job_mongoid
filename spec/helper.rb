@@ -33,6 +33,7 @@ class Story
   def whatever(n, _)
     tell * n
   end
+
   def self.count; end
 
   handle_asynchronously :whatever
