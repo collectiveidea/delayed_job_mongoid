@@ -34,6 +34,27 @@ module Delayed
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
 
+          criteria = reservation_criteria worker, right_now, max_run_time
+
+          if Gem::Version.create(::Mongoid::VERSION) >= Gem::Version.create('5.0.0')
+            criteria.find_one_and_update(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
+              :return_document => :after
+            )
+          else
+            criteria.find_and_modify(
+              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
+              :new => true
+            )
+          end
+        end
+
+        # Mongo criteria matching all the jobs the worker can reserver
+        #
+        # Jobs are sorted by priority and run_at.
+        #
+        # @api private
+        def self.reservation_criteria(worker, right_now, max_run_time)
           criteria = where(
             :run_at => {'$lte' => right_now},
             :failed_at => nil
@@ -48,17 +69,7 @@ module Delayed
           criteria = criteria.any_in(:queue => Worker.queues) if Worker.queues.any?
           criteria = criteria.desc(:locked_by).asc(:priority).asc(:run_at)
 
-          if Gem::Version.create(::Mongoid::VERSION) >= Gem::Version.create('5.0.0')
-            criteria.find_one_and_update(
-              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
-              :return_document => :after
-            )
-          else
-            criteria.find_and_modify(
-              {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
-              :new => true
-            )
-          end
+          criteria
         end
 
         # When a worker is exiting, make sure we don't have any locked jobs.
