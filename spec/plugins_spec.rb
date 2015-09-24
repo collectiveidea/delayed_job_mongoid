@@ -1,6 +1,6 @@
 require 'helper'
 
-if Delayed::Backend::Mongoid.mongoid3?
+if ::Mongoid::Compatibility::Version.mongoid3?
   describe Delayed::Backend::Mongoid::Job do
     let(:worker) { Delayed::Worker.new }
     before do

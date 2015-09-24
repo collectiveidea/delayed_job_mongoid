@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'delayed_job'
 require 'mongoid'
+require 'mongoid/compatibility'
 
 module Delayed
   module Backend
@@ -36,7 +37,7 @@ module Delayed
 
           criteria = reservation_criteria worker, right_now, max_run_time
 
-          if Gem::Version.create(::Mongoid::VERSION) >= Gem::Version.create('5.0.0')
+          if ::Mongoid::Compatibility::Version.mongoid5?
             criteria.find_one_and_update(
               {'$set' => {:locked_at => right_now, :locked_by => worker.name}},
               :return_document => :after
@@ -84,14 +85,11 @@ module Delayed
 
         # Hook method that is called after a new worker is forked
         def self.after_fork
-          if Gem::Version.create(::Mongoid::VERSION) < Gem::Version.create('5.0.0')
+          if ::Mongoid::Compatibility::Version.mongoid4?
             # to avoid `failed with error "unauthorized"` errors in Mongoid 4.0.alpha2
             ::Mongoid.default_session.disconnect
           end
         end
-      end
-      def self.mongoid3?
-        ::Mongoid.const_defined? :Observer # deprecated in Mongoid 4.x
       end
     end
   end
