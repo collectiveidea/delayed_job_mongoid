@@ -2,7 +2,7 @@
 # clear Mongoid::IdentityMap before each job
 #
 
-if Delayed::Backend::Mongoid.mongoid3?
+if ::Mongoid::Compatibility::Version.mongoid3?
   module Delayed
     module Plugins
       class ClearIdentityMap < Plugin
