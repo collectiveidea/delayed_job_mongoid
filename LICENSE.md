@@ -1,4 +1,4 @@
-Copyright © 2010 Collective Idea
+Copyright © 2010-2015 Collective Idea & Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
