@@ -1,10 +1,10 @@
 # DelayedJob Mongoid backend
 
-[![Gem Version](http://img.shields.io/gem/v/delayed_job_mongoid.svg)][gem]
-[![Build Status](http://img.shields.io/travis/collectiveidea/delayed_job_mongoid.svg)][travis]
-[![Dependency Status](http://img.shields.io/gemnasium/collectiveidea/delayed_job_mongoid.svg)][gemnasium]
-[![Code Climate](http://img.shields.io/codeclimate/github/collectiveidea/delayed_job_mongoid.svg)][codeclimate]
-[![Coverage Status](http://img.shields.io/coveralls/collectiveidea/delayed_job_mongoid.svg)][coveralls]
+[![Gem Version](https://badge.fury.io/rb/delayed_job_mongoid.svg)](http://badge.fury.io/rb/delayed_job_mongoid)
+[![Build Status](https://travis-ci.org/collectiveidea/delayed_job_mongoid.svg?branch=master)](https://travis-ci.org/collectiveidea/delayed_job_mongoid)
+[![Dependency Status](https://gemnasium.com/collectiveidea/delayed_job_mongoid.svg)](https://gemnasium.com/collectiveidea/delayed_job_mongoid)
+[![Code Climate](https://codeclimate.com/github/collectiveidea/delayed_job_mongoid.svg)](https://codeclimate.com/github/collectiveidea/delayed_job_mongoid)
+[![Coverage Status](https://coveralls.io/repos/collectiveidea/delayed_job_mongoid/badge.svg?branch=master&service=github)](https://coveralls.io/github/collectiveidea/delayed_job_mongoid?branch=master)
 
 [gem]: https://rubygems.org/gems/delayed_job_mongoid
 [travis]: http://travis-ci.org/collectiveidea/delayed_job_mongoid
