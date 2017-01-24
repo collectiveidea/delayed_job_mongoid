@@ -24,5 +24,4 @@ else
   gem 'mongoid', version
 end
 
-gem 'delayed_job', :git => 'https://github.com/maxjacobson/delayed_job.git', :branch => 'fix-yaml-deserialization-error'
 gemspec
