@@ -16,7 +16,7 @@ if ::Mongoid::Compatibility::Version.mongoid3?
     end
     it 'clears mongoid identity map' do
       expect(Mongoid::IdentityMap).to receive(:clear).once
-      described_class.enqueue SimpleJob.new, :priority => 5
+      described_class.enqueue SimpleJob.new, priority: 5
       worker.work_off
     end
   end

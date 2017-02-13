@@ -1,28 +1,36 @@
+langauge: ruby
+
 cache: bundler
-language: ruby
-env:
-  global:
-    - JRUBY_OPTS="$JRUBY_OPTS --debug"
-  matrix:
-    - MONGOID_VERSION=3
-    - MONGOID_VERSION=4
-    - MONGOID_VERSION=5
-rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1
-  - 2.2
-  - jruby-19mode
-  - jruby-9000
-  - jruby-head
-  - rbx-2
-  - ruby-head
+
+sudo: false
+
 matrix:
+  include:
+    - rvm: 2.3.1
+      env:
+        - MONGOID_VERSION=6
+    - rvm: 2.3.1
+      env:
+        - MONGOID_VERSION=5
+    - rvm: 2.2
+      env:
+        - MONGOID_VERSION=4
+    - rvm: 2.1
+      env:
+        - MONGOID_VERSION=3
+    - rvm: jruby-head
+    - rvm: rbx-2
+    - rvm: ruby-head
   allow_failures:
     - rvm: jruby-head
     - rvm: rbx-2
     - rvm: ruby-head
-  fast_finish: true
-services:
-  - mongodb
-sudo: false
+
+services: mongodb
+
+addons:
+  apt:
+    sources:
+      - mongodb-3.2-precise
+    packages:
+      - mongodb-org-server
