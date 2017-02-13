@@ -1,8 +1,7 @@
-### 2.3.0 (Next)
+### 2.3.0 (2017/02/13)
 
 * [#72](https://github.com/collectiveidea/delayed_job_mongoid/pull/72): Fix: Unknown alias: 1 (Psych::BadAlias) when referencing an object twice from the object being serialized - [@dblock](https://github.com/dblock), [@maxjacobson](https://github.com/maxjacobson).
 * [#71](https://github.com/collectiveidea/delayed_job_mongoid/pull/71): Support Mongoid 6.0 - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 2.2.0 (2015/09/24)
 
