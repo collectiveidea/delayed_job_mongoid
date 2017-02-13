@@ -14,8 +14,7 @@
 
 ## Requirements
 
-Make sure you are using MongoDB version 1.3 or newer. `delayed_job_mongoid`
-uses the `findandmodify` command which is only available in recent versions.
+Mongoid 3, 4, 5 or 6.
 
 ## Installation
 
@@ -23,12 +22,11 @@ Add the gem to your Gemfile:
 
     gem 'delayed_job_mongoid'
 
-After running `bundle install`, create the indexes (and don't forget to do this
-on your production database):
+Create the indexes (and don't forget to do this on your production database):
 
     script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
 
-To generate script/delayed_job:
+To generate `script/delayed_job`:
 
     rails generate delayed_job
 
