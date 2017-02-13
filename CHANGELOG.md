@@ -1,3 +1,7 @@
+### 2.3.1 (Next)
+
+* Your contribution here.
+
 ### 2.3.0 (2017/02/13)
 
 * [#72](https://github.com/collectiveidea/delayed_job_mongoid/pull/72): Fix: Unknown alias: 1 (Psych::BadAlias) when referencing an object twice from the object being serialized - [@dblock](https://github.com/dblock), [@maxjacobson](https://github.com/maxjacobson).
