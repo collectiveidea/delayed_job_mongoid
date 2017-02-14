@@ -26,4 +26,6 @@ else
   gem 'mongoid', version
 end
 
+gem 'delayed_job', :github => 'dblock/delayed_job', :branch => 'not-manipulating-same-instance'
+
 gemspec
