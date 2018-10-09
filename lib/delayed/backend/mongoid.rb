@@ -37,7 +37,7 @@ module Delayed
 
           criteria = reservation_criteria worker, right_now, max_run_time
 
-          if ::Mongoid::Compatibility::Version.mongoid5? || ::Mongoid::Compatibility::Version.mongoid6?
+          if ::Mongoid::Compatibility::Version.mongoid5? || ::Mongoid::Compatibility::Version.mongoid6? || ::Mongoid::Compatibility::Version.mongoid7?
             criteria.find_one_and_update(
               { '$set' => { locked_at: right_now, locked_by: worker.name } },
               return_document: :after
