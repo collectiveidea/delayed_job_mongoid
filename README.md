@@ -12,7 +12,7 @@
 
 ## Requirements
 
-Mongoid 3, 4, 5 or 6.
+Mongoid 3, 4, 5, 6 or 7.
 
 ## Installation
 
