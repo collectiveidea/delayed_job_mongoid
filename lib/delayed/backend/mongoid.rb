@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'delayed_job'
 require 'mongoid'
 require 'mongoid/compatibility'

@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'rubygems'
 require 'bundler/setup'
 Bundler::GemHelper.install_tasks
@@ -25,4 +24,4 @@ Yardstick::Rake::Verify.new do |verify|
   verify.threshold = 53.3
 end
 
-task default: [:spec, :rubocop, :verify_measurements]
+task default: %i[spec rubocop verify_measurements]
