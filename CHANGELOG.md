@@ -1,3 +1,7 @@
+### 2.3.2 (Next)
+
+* Your contribution here.
+
 ### 2.3.1 (2019/02/26)
 
 * [#77](https://github.com/collectiveidea/delayed_job_mongoid/pull/77): Support Mongoid 7.0 - [Startouf](https://github.com/Startouf).

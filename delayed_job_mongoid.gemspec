@@ -10,5 +10,5 @@ Gem::Specification.new do |spec|
   spec.name            = 'delayed_job_mongoid'
   spec.require_paths   = ['lib']
   spec.summary         = 'Mongoid backend for delayed_job'
-  spec.version         = '2.3.1'
+  spec.version         = '2.3.2'
 end
