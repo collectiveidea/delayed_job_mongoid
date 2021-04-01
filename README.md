@@ -12,7 +12,9 @@
 
 ## Requirements
 
-Mongoid 3, 4, 5, 6 or 7.
+Mongoid 5 or later.
+
+(For Mongoid 3 and 4, use 2.x version of this gem)
 
 ## Installation
 
@@ -28,5 +30,4 @@ To generate `script/delayed_job`:
 
     rails generate delayed_job
 
-That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as
-normal.
+That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as normal.
