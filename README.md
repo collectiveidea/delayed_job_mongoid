@@ -14,7 +14,7 @@
 
 Mongoid 5 or later.
 
-(For Mongoid 3 and 4, use 2.x version of this gem)
+For Mongoid 3 and 4, use 2.x version of this gem.
 
 ## Installation
 
