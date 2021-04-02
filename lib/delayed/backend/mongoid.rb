@@ -1,6 +1,5 @@
 require 'delayed_job'
 require 'mongoid'
-require 'mongoid/compatibility'
 
 module Delayed
   module Backend
@@ -33,23 +32,14 @@ module Delayed
         # Atomically picks and locks one job from the collection.
         def self.reserve(worker, max_run_time = Worker.max_run_time)
           right_now = db_time_now
-
-          criteria = reservation_criteria worker, right_now, max_run_time
-
-          if ::Mongoid::Compatibility::Version.mongoid2? || ::Mongoid::Compatibility::Version.mongoid3? || ::Mongoid::Compatibility::Version.mongoid4?
-            criteria.find_and_modify(
-              { '$set' => { locked_at: right_now, locked_by: worker.name } },
-              new: true
-            )
-          else
-            criteria.find_one_and_update(
-              { '$set' => { locked_at: right_now, locked_by: worker.name } },
-              return_document: :after
-            )
-          end
+          criteria = reservation_criteria(worker, right_now, max_run_time)
+          criteria.find_one_and_update(
+            { '$set' => { locked_at: right_now, locked_by: worker.name } },
+            return_document: :after
+          )
         end
 
-        # Mongo criteria matching all the jobs the worker can reserver
+        # Mongo criteria matching all the jobs the worker can reserve.
         #
         # Jobs are sorted by priority and run_at.
         #
@@ -84,10 +74,7 @@ module Delayed
 
         # Hook method that is called after a new worker is forked
         def self.after_fork
-          if ::Mongoid::Compatibility::Version.mongoid4?
-            # to avoid `failed with error "unauthorized"` errors in Mongoid 4.0.alpha2
-            ::Mongoid.default_session.disconnect
-          end
+          ::Mongoid.disconnect_clients
         end
       end
     end

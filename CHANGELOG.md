@@ -1,5 +1,7 @@
-### 2.3.2 (Next)
+### 3.0.0 (Next)
 
+* [#81](https://github.com/collectiveidea/delayed_job_mongoid/pull/81): Drop support for Mongoid 3.0 and 4.0 - [johnnyshields](https://github.com/johnnyshields).
+* [#81](https://github.com/collectiveidea/delayed_job_mongoid/pull/81): Perform disconnect on after_fork on all Mongoid versions - [johnnyshields](https://github.com/johnnyshields).
 * Your contribution here.
 
 ### 2.3.1 (2019/02/26)
