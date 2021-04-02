@@ -39,7 +39,7 @@ module Delayed
           )
         end
 
-        # Mongo criteria matching all the jobs the worker can reserver
+        # Mongo criteria matching all the jobs the worker can reserve.
         #
         # Jobs are sorted by priority and run_at.
         #
