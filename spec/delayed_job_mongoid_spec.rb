@@ -20,6 +20,9 @@ describe Delayed::Backend::Mongoid::Job do
   end
 
   describe '.after_fork' do
+    # ensure Mongoid is connected
+    before { ::Delayed::Job.first }
+
     it 'reconnects Mongoid' do
       expect_any_instance_of(::Mongo::Client).to receive(:close)
       expect_any_instance_of(::Mongo::Client).to receive(:reconnect)
