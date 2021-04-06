@@ -11,4 +11,22 @@ describe Delayed::Backend::Mongoid::Job do
       expect(job.reload.payload_object).to be_a StoryWrapperJob
     end
   end
+
+  describe '.before_fork' do
+    it 'disconnects Mongoid' do
+      expect(::Mongoid).to receive(:disconnect_clients)
+      Delayed::Job.before_fork
+    end
+  end
+
+  describe '.after_fork' do
+    # ensure Mongoid is connected
+    before { ::Delayed::Job.first }
+
+    it 'reconnects Mongoid' do
+      expect_any_instance_of(::Mongo::Client).to receive(:close)
+      expect_any_instance_of(::Mongo::Client).to receive(:reconnect)
+      Delayed::Job.after_fork
+    end
+  end
 end
