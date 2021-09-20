@@ -1,18 +1,16 @@
 # DelayedJob Mongoid backend
 
-[![Gem Version](https://badge.fury.io/rb/delayed_job_mongoid.svg)](http://badge.fury.io/rb/delayed_job_mongoid)
-[![Build Status](https://travis-ci.org/collectiveidea/delayed_job_mongoid.svg?branch=master)](https://travis-ci.org/collectiveidea/delayed_job_mongoid)
-[![Code Climate](https://codeclimate.com/github/collectiveidea/delayed_job_mongoid.svg)](https://codeclimate.com/github/collectiveidea/delayed_job_mongoid)
-[![Coverage Status](https://coveralls.io/repos/collectiveidea/delayed_job_mongoid/badge.svg?branch=master&service=github)](https://coveralls.io/github/collectiveidea/delayed_job_mongoid?branch=master)
-
-[gem]: https://rubygems.org/gems/delayed_job_mongoid
-[travis]: http://travis-ci.org/collectiveidea/delayed_job_mongoid
-[codeclimate]: https://codeclimate.com/github/collectiveidea/delayed_job_mongoid
-[coveralls]: https://coveralls.io/r/collectiveidea/delayed_job_mongoid
+[![Gem Version][gem-img]][gem-url]
+[![Build Status][ghactions-img]][ghactions-url]
+[![Code Climate][codeclimate-img]][codeclimate-url]
+[![Coverage][coveralls-img]][coveralls-url]
 
 ## Requirements
 
-Mongoid 5 or later.
+Delayed Job Mongoid supports the following dependency versions:
+
+- Ruby 2.3+
+- Mongoid 5+
 
 For Mongoid 3 and 4, use 2.x version of this gem.
 
@@ -20,14 +18,29 @@ For Mongoid 3 and 4, use 2.x version of this gem.
 
 Add the gem to your Gemfile:
 
-    gem 'delayed_job_mongoid'
+```ruby
+gem 'delayed_job_mongoid'
+```
 
-Create the indexes (and don't forget to do this on your production database):
+Then create the indexes (don't forget to do this in production):
 
-    script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
+```
+script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
+```
 
 To generate `script/delayed_job`:
 
-    rails generate delayed_job
+```
+rails generate delayed_job
+```
 
 That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as normal.
+
+[gem-img]: https://badge.fury.io/rb/delayed_job_mongoid.svg
+[gem-url]: https://rubygems.org/gems/delayed_job_mongoid
+[ghactions-img]: https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml/badge.svg?query=branch%3Amaster
+[ghactions-url]: https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml?query=branch%3Amaster
+[codeclimate-img]: https://codeclimate.com/github/collectiveidea/delayed_job_mongoid.svg
+[codeclimate-url]: https://codeclimate.com/github/collectiveidea/delayed_job_mongoid
+[coveralls-img]: https://coveralls.io/github/collectiveidea/delayed_job_mongoid/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/collectiveidea/delayed_job_mongoid?branch=master
