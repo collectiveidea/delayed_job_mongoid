@@ -1,8 +1,13 @@
-### 3.0.0 (Next)
+### 3.0.1
+
+* Your contribution here.
+
+### 3.0.0
 
 * [#81](https://github.com/collectiveidea/delayed_job_mongoid/pull/81): Drop support for Mongoid 3.0 and 4.0 - [johnnyshields](https://github.com/johnnyshields).
 * [#82](https://github.com/collectiveidea/delayed_job_mongoid/pull/82): Correctly handle before_fork and after_fork hooks - [johnnyshields](https://github.com/johnnyshields).
-* Your contribution here.
+* [#85](https://github.com/collectiveidea/delayed_job_mongoid/pull/85): Add additional indexes - [johnnyshields](https://github.com/johnnyshields).
+* [#87](https://github.com/collectiveidea/delayed_job_mongoid/pull/87): Convert Travis CI to GH Actions - [johnnyshields](https://github.com/johnnyshields).
 
 ### 2.3.1 (2019/02/26)
 
