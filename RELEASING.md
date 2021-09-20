@@ -1,5 +1,4 @@
-Releasing Delayed::Backend::Mongoid::Job
-========================================
+# Releasing Delayed::Backend::Mongoid::Job
 
 There are no particular rules about when to release delayed_job_mongoid. Release bug fixes frequently, features not so frequently and breaking API changes rarely.
 
@@ -12,7 +11,7 @@ bundle install
 rake
 ```
 
-Check that the last build succeeded in [Travis CI](https://travis-ci.org/collectiveidea/delayed_job_mongoid) for all supported platforms.
+Check that the last build succeeded in [Github Actions](https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml?query=branch%3Amaster) for all supported platforms.
 
 Check and possibly increment the version, modify [delayed_job_mongoid.gemspec](delayed_job_mongoid.gemspec).
 

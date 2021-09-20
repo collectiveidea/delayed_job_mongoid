@@ -12,12 +12,22 @@ group :test do
   gem 'simplecov', '>= 0.9'
 end
 
-case version = ENV['MONGOID_VERSION'] || '7.0'
-when /^7/
-  gem 'mongoid', '~> 7.0'
-when /^6/
+case version = ENV['MONGOID_VERSION'] || '~> 7.0'
+when 'HEAD'
+  gem 'mongoid', github: 'mongodb/mongoid'
+when '7'
+  gem 'mongoid', '~> 7.3'
+when '7.3'
+  gem 'mongoid', '~> 7.3.0'
+when '7.2'
+  gem 'mongoid', '~> 7.2.0'
+when '7.1'
+  gem 'mongoid', '~> 7.1.0'
+when '7.0'
+  gem 'mongoid', '~> 7.0.0'
+when '6'
   gem 'mongoid', '~> 6.0'
-when /^5/
+when '5'
   gem 'mongoid', '~> 5.0'
 else
   gem 'mongoid', version
