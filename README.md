@@ -52,9 +52,9 @@ require 'delayed/plugins/mongo_silencer'
 Delayed::Worker.plugins << Delayed::Plugins::MongoSilencer
 ```
 
-To ensure thread safety, this plugin requires your Mongoid and/or
-Mongo loggers to be instances of `ActiveSupport::Logger`.
-It will ignore instances of the Ruby standard library `Logger` class.
+To ensure thread safety, this plugin requires your `Mongo::Logger.logger`
+to be an instance of `ActiveSupport::Logger` class. It will ignore instances
+of the Ruby standard library `Logger` class.
 
 ### Customizing Job Class
 
