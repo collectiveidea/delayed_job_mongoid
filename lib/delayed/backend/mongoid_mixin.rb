@@ -50,7 +50,7 @@ module Delayed
             criteria = reservation_criteria(worker, right_now, max_run_time)
             criteria.find_one_and_update(
               { '$set' => { locked_at: right_now, locked_by: worker.name } },
-              return_document: :after
+              { return_document: :after }
             )
           end
 
@@ -84,8 +84,7 @@ module Delayed
               failed_at: nil
             ).any_of(
               { locked_by: worker.name },
-              { locked_at: nil },
-              locked_at: { '$lt' => (right_now - max_run_time) }
+              { locked_at: { '$not' => { '$gte' => (right_now - max_run_time) } } }
             )
 
             criteria = criteria.gte(priority: Worker.min_priority.to_i) if Worker.min_priority
