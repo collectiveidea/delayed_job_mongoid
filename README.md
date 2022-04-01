@@ -36,6 +36,32 @@ rails generate delayed_job
 
 That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as normal.
 
+## Advanced Usage
+
+### Customizing Job Class
+
+Delayed Job allows specifying a custom backend class for jobs.
+For example, you may wish to specify a different database
+collection name. To do this:
+
+```ruby
+# in an initializer
+
+class MyJob
+  include ::Mongoid::Document
+
+  store_in(collection: :my_jobs)
+
+  include ::Delayed::Backend::Mongoid::Mixin
+end
+
+Delayed::Worker.backend = MyJob
+
+# in your application
+
+MyJob.enqueue(job_object)
+```
+
 [gem-img]: https://badge.fury.io/rb/delayed_job_mongoid.svg
 [gem-url]: https://rubygems.org/gems/delayed_job_mongoid
 [ghactions-img]: https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml/badge.svg?query=branch%3Amaster
