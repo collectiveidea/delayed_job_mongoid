@@ -11,7 +11,13 @@ end
 
 require 'rspec'
 require 'delayed_job_mongoid'
+require 'delayed/plugins/mongo_silencer'
 require 'delayed/backend/shared_spec'
+require 'models/story'
+require 'models/story_wrapper_job'
+
+$mongoid_logger = Mongoid.logger
+$mongo_logger = Mongo::Logger.logger
 
 RSpec.configure do |config|
   config.expect_with(:rspec) do |c|

@@ -8,7 +8,14 @@ Metrics:
 Metrics/LineLength:
   Max: 512
 
+Style/BracesAroundHashParameters:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
+
+Style/GlobalVars:
+  Exclude:
+    - spec/**/*
 
 inherit_from: .rubocop_todo.yml
