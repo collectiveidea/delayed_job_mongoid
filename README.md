@@ -86,5 +86,5 @@ MyJob.enqueue(job_object)
 [ghactions-url]: https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml?query=branch%3Amaster
 [codeclimate-img]: https://codeclimate.com/github/collectiveidea/delayed_job_mongoid.svg
 [codeclimate-url]: https://codeclimate.com/github/collectiveidea/delayed_job_mongoid
-[coveralls-img]: https://coveralls.io/github/collectiveidea/delayed_job_mongoid/badge.svg?branch=master
+[coveralls-img]: https://coveralls.io/repos/github/collectiveidea/delayed_job_mongoid/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/collectiveidea/delayed_job_mongoid?branch=master
