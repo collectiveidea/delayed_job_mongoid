@@ -1,6 +1,7 @@
 ### 3.0.1
 
 * Your contribution here.
+* [#89](https://github.com/collectiveidea/delayed_job_mongoid/pull/89): Add MongoSilencer plugin to silence Delayed Job polling - [johnnyshields](https://github.com/johnnyshields).
 * [#88](https://github.com/collectiveidea/delayed_job_mongoid/pull/88): Extract out mixin to enable better backend customization - [johnnyshields](https://github.com/johnnyshields).
 
 ### 3.0.0
