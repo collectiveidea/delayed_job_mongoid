@@ -38,6 +38,24 @@ That's it. Use [delayed_job](http://github.com/collectiveidea/delayed_job) as no
 
 ## Advanced Usage
 
+### Silencing Noisy Logging
+
+By default, the Mongo Ruby Driver will print log lines every
+5 seconds as Delayed Job polls your database. Use the following
+plugin to silence logs which happen while polling (except `error`
+level) and only log operations which happen during job execution.
+
+```ruby
+# in initializers/delayed_job.rb
+
+require 'delayed/plugins/mongo_silencer'
+Delayed::Worker.plugins << Delayed::Plugins::MongoSilencer
+```
+
+To ensure thread safety, this plugin requires your Mongoid and/or
+Mongo loggers to be instances of `ActiveSupport::Logger`.
+It will ignore instances of the Ruby standard library `Logger` class.
+
 ### Customizing Job Class
 
 Delayed Job allows specifying a custom backend class for jobs.
