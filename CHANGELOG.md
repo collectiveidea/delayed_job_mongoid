@@ -1,6 +1,9 @@
-### 3.0.1
+### 3.0.2
 
 * Your contribution here.
+
+### 3.0.1
+
 * [#90](https://github.com/collectiveidea/delayed_job_mongoid/pull/90): Optimize job reservation query by combining two "$or" branches to one.  - [johnnyshields](https://github.com/johnnyshields).
 * [#89](https://github.com/collectiveidea/delayed_job_mongoid/pull/89): Add MongoSilencer plugin to silence Delayed Job polling - [johnnyshields](https://github.com/johnnyshields).
 * [#88](https://github.com/collectiveidea/delayed_job_mongoid/pull/88): Extract out mixin to enable better backend customization - [johnnyshields](https://github.com/johnnyshields).
