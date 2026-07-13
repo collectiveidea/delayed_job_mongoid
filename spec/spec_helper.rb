@@ -4,7 +4,7 @@ unless defined?(JRUBY_VERSION)
 
   SimpleCov.formatters = [SimpleCov::Formatter::HTMLFormatter, Coveralls::SimpleCov::Formatter]
   SimpleCov.start do
-    add_filter '/spec/'
+    skip '/spec/'
     minimum_coverage(76.39)
   end
 end

@@ -9,7 +9,7 @@ group :test do
   gem 'rest-client', '~> 1.6.0', platforms: %i[jruby ruby_18]
   gem 'rspec', '>= 3'
   gem 'rubocop', '0.65.0'
-  gem 'simplecov', '>= 0.9'
+  gem 'simplecov', '>= 1'
 end
 
 case version = ENV['MONGOID_VERSION'] || '~> 7.0'
