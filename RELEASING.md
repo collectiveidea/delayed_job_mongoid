@@ -8,58 +8,46 @@ Run tests, check that all tests succeed locally.
 
 ```
 bundle install
-rake
+bundle exec rake
 ```
 
 Check that the last build succeeded in [Github Actions](https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/ci.yml?query=branch%3Amaster) for all supported platforms.
 
-Check and possibly increment the version, modify [delayed_job_mongoid.gemspec](delayed_job_mongoid.gemspec).
+Choose the version following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), and set it in [delayed_job_mongoid.gemspec](delayed_job_mongoid.gemspec):
 
-*  Increment the third number if the release has bug fixes and/or very minor features, only (eg. change `0.5.1` to `0.5.2`).
-*  Increment the second number if the release contains major features or breaking API changes (eg. change `0.5.1` to `0.4.0`).
+*  Increment the third number if the release only has bug fixes (eg. change `3.0.1` to `3.0.2`).
+*  Increment the second number if the release adds features in a backwards compatible way (eg. change `3.0.1` to `3.1.0`).
+*  Increment the first number if the release has breaking changes, including any entry marked **Breaking:** (eg. change `3.0.1` to `4.0.0`).
 
-Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
+In [CHANGELOG.md](CHANGELOG.md), rename `## [Unreleased]` to the new version and today's date, and add a new empty `## [Unreleased]` above it:
 
 ```
-### 0.4.0 (2014-01-27)
+## [Unreleased]
+
+## [X.Y.Z] - YYYY-MM-DD
 ```
 
-Remove the line with "Your contribution here.", since there will be no more contributions to this release.
+Then update the compare links at the bottom of the file, where `vPREVIOUS` is the last release's tag:
+
+```
+[Unreleased]: https://github.com/collectiveidea/delayed_job_mongoid/compare/vX.Y.Z...HEAD
+[X.Y.Z]: https://github.com/collectiveidea/delayed_job_mongoid/compare/vPREVIOUS...vX.Y.Z
+```
 
 Commit your changes.
 
 ```
 git add CHANGELOG.md delayed_job_mongoid.gemspec
-git commit -m "Preparing for release, 0.4.0."
+git commit -m "Prepare for release, X.Y.Z"
 ```
 
 Release.
 
 ```
-$ rake release
+$ bundle exec rake release
 
-delayed_job_mongoid 0.4.0 built to pkg/delayed_job_mongoid-0.4.0.gem.
-Tagged v0.4.0.
+delayed_job_mongoid X.Y.Z built to pkg/delayed_job_mongoid-X.Y.Z.gem.
+Tagged vX.Y.Z.
 Pushed git commits and tags.
-Pushed delayed_job_mongoid 0.4.0 to rubygems.org.
-```
-
-### Prepare for the Next Developer Iteration
-
-Add the next release to [CHANGELOG.md](CHANGELOG.md).
-
-```
-### 0.4.1 (Next)
-
-* Your contribution here.
-```
-
-Increment the minor version, modify [delayed_job_mongoid.gemspec](delayed_job_mongoid.gemspec).
-
-Commit your changes.
-
-```
-git add CHANGELOG.md delayed_job_mongoid.gemspec
-git commit -m "Preparing for next developer iteration, 0.4.1."
-git push origin master
+Pushed delayed_job_mongoid X.Y.Z to rubygems.org.
 ```
