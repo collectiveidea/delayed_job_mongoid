@@ -5,6 +5,9 @@ describe Delayed::Plugins::MongoSilencer do
   let(:mongoid_logger) { ActiveSupport::Logger.new(mongoid_io) }
   let(:mongo_io) { StringIO.new }
   let(:mongo_logger) { ActiveSupport::Logger.new(mongo_io) }
+  # Ruby 3.4 changed Hash#inspect from {"a"=>1} to {"a" => 1}
+  let(:find_stories) { /"find" ?=> ?"stories"/ }
+  let(:find_and_modify_jobs) { /"findAndModify" ?=> ?"delayed_backend_mongoid_jobs"/ }
   let(:run_worker) do
     worker = Delayed::Worker.new
     thread = Thread.new { worker.start }
@@ -36,8 +39,8 @@ describe Delayed::Plugins::MongoSilencer do
       it do
         run_worker
         expect(mongoid_io.string.lines.size).to eq 0
-        expect(mongo_io.string.lines.any? { |l| l.include?('"find"=>"stories"') }).to eq true
-        expect(mongo_io.string.lines.any? { |l| l.include?('"findAndModify"=>"delayed_backend_mongoid_jobs"') }).to eq false
+        expect(mongo_io.string).to match(find_stories)
+        expect(mongo_io.string).not_to match(find_and_modify_jobs)
       end
     end
 
@@ -46,8 +49,8 @@ describe Delayed::Plugins::MongoSilencer do
 
       it do
         run_worker
-        expect(mongo_io.string.lines.any? { |l| l.include?('"find"=>"stories"') }).to eq true
-        expect(mongo_io.string.lines.any? { |l| l.include?('"findAndModify"=>"delayed_backend_mongoid_jobs"') }).to eq true
+        expect(mongo_io.string).to match(find_stories)
+        expect(mongo_io.string).to match(find_and_modify_jobs)
       end
     end
   end
@@ -56,8 +59,8 @@ describe Delayed::Plugins::MongoSilencer do
     it do
       run_worker
       expect(mongoid_io.string.lines.size).to eq 0
-      expect(mongo_io.string.lines.any? { |l| l.include?('"find"=>"stories"') }).to eq true
-      expect(mongo_io.string.lines.any? { |l| l.include?('"findAndModify"=>"delayed_backend_mongoid_jobs"') }).to eq true
+      expect(mongo_io.string).to match(find_stories)
+      expect(mongo_io.string).to match(find_and_modify_jobs)
     end
   end
 end
