@@ -1,13 +1,14 @@
 class Story
   include ::Mongoid::Document
+
   field :text
 
   def tell
     text
   end
 
-  def whatever(n, _)
-    tell * n
+  def whatever(times, _)
+    tell * times
   end
 
   def self.count; end

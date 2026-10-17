@@ -2,9 +2,9 @@ module Delayed
   module PsychExt
     class ToRuby < Psych::Visitors::ToRuby
       # see https://github.com/collectiveidea/delayed_job_mongoid/pull/65
-      alias _visit_Psych_Nodes_Mapping visit_Psych_Nodes_Mapping
+      alias _visit_Psych_Nodes_Mapping visit_Psych_Nodes_Mapping # rubocop:disable Naming/MethodName
 
-      def visit_Psych_Nodes_Mapping(object) # rubocop:disable MethodName
+      def visit_Psych_Nodes_Mapping(object) # rubocop:disable Naming/MethodName
         document = _visit_Psych_Nodes_Mapping(object)
         register(object, document) if document
         document

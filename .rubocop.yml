@@ -1,14 +1,14 @@
 AllCops:
   Exclude:
     - vendor/**/*
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2
 
-Metrics:
-  Enabled: false
-
-Metrics/LineLength:
+Layout/LineLength:
   Max: 512
 
-Style/BracesAroundHashParameters:
+Metrics:
   Enabled: false
 
 Style/Documentation:
@@ -18,4 +18,5 @@ Style/GlobalVars:
   Exclude:
     - spec/**/*
 
-inherit_from: .rubocop_todo.yml
+Style/FrozenStringLiteralComment:
+  Enabled: false

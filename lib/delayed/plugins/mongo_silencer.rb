@@ -16,12 +16,10 @@ module Delayed
         # operations for job deletion and job errors, so these will
         # still appear in the log.
         lifecycle.around(:perform) do |*_args, &block|
-          begin
-            unsilence!
-            block.call
-          ensure
-            silence!
-          end
+          unsilence!
+          block.call
+        ensure
+          silence!
         end
       end
 
@@ -41,7 +39,7 @@ module Delayed
         private
 
         def mongo_logger?
-          Mongo::Logger.logger && Mongo::Logger.logger.respond_to?(:local_level)
+          Mongo::Logger.logger.respond_to?(:local_level)
         end
       end
     end

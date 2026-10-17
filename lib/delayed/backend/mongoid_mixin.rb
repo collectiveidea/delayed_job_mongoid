@@ -68,7 +68,7 @@ module Delayed
           # In a multi-process setup, this will be called to ensure fresh
           # database connections are immediately made on each newly spawned child process.
           def after_fork
-            ::Mongoid::Clients.clients.each do |_name, client|
+            ::Mongoid::Clients.clients.each_value do |client|
               client.close
               client.reconnect
             end
@@ -90,9 +90,7 @@ module Delayed
             criteria = criteria.gte(priority: Worker.min_priority.to_i) if Worker.min_priority
             criteria = criteria.lte(priority: Worker.max_priority.to_i) if Worker.max_priority
             criteria = criteria.any_in(queue: Worker.queues) if Worker.queues.any?
-            criteria = criteria.desc(:locked_by).asc(:priority).asc(:run_at)
-
-            criteria
+            criteria.desc(:locked_by).asc(:priority).asc(:run_at)
           end
         end
       end
