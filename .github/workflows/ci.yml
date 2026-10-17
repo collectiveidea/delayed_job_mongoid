@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Test (Ruby ${{ matrix.ruby }}, Mongoid ${{ matrix.mongoid }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.2', '3.3', '3.4', '4.0', jruby-10.0, jruby-head, ruby-head]
+        mongoid: ['7', '8', '9']
+        include:
+          # The newest MongoDB server each Mongoid version supports
+          - mongoid: '7'
+            mongodb: '8.0'
+          - mongoid: '8'
+            mongodb: '7.0'
+          - mongoid: '9'
+            mongodb: '8.0'
+
+    continue-on-error: ${{ endsWith(matrix.ruby, 'head') }}
+
+    services:
+      mongodb:
+        image: mongo:${{ matrix.mongodb }}
+        ports:
+          - 27017:27017
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      env:
+        MONGOID_VERSION: ${{ matrix.mongoid }}
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run tests
+      env:
+        MONGOID_VERSION: ${{ matrix.mongoid }}
+      run: bundle exec rspec
+    - name: Coveralls Parallel
+      uses: coverallsapp/github-action@main
+      with:
+        github-token: ${{ secrets.github_token }}
+        flag-name: run-${{ matrix.ruby }}-${{ matrix.mongoid }}
+        parallel: true
+        # Don't fail otherwise-green jobs when coveralls.io has an outage
+        fail-on-error: false
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@main
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
+        fail-on-error: false

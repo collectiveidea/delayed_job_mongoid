@@ -11,7 +11,7 @@ bundle install
 rake
 ```
 
-Check that the last build succeeded in [Github Actions](https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/test.yml?query=branch%3Amaster) for all supported platforms.
+Check that the last build succeeded in [Github Actions](https://github.com/collectiveidea/delayed_job_mongoid/actions/workflows/ci.yml?query=branch%3Amaster) for all supported platforms.
 
 Check and possibly increment the version, modify [delayed_job_mongoid.gemspec](delayed_job_mongoid.gemspec).
 
