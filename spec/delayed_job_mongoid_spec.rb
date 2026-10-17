@@ -10,6 +10,25 @@ describe Delayed::Backend::Mongoid::Job do
     end
   end
 
+  context 'when a serialized Mongoid document no longer exists' do
+    let(:yaml) do
+      story = Story.create!(text: 'My lost story')
+      story.to_yaml.tap { story.destroy }
+    end
+
+    around do |example|
+      raise_not_found_error = Mongoid.raise_not_found_error
+      Mongoid.raise_not_found_error = false
+      example.run
+    ensure
+      Mongoid.raise_not_found_error = raise_not_found_error
+    end
+
+    it 'deserializes it as nil if Mongoid does not raise' do
+      expect(YAML.load_dj(yaml)).to be_nil
+    end
+  end
+
   describe '.before_fork' do
     it 'disconnects Mongoid' do
       expect(::Mongoid).to receive(:disconnect_clients)
