@@ -68,3 +68,22 @@ jobs:
         run: bundle exec rake spec
         env:
           MONGOID_VERSION: ${{ matrix.mongoid }}
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@main
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.ruby }}-${{ matrix.mongoid }}
+          parallel: true
+          # Don't fail otherwise-green jobs when coveralls.io has an outage
+          fail-on-error: false
+
+  finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@main
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
+          fail-on-error: false

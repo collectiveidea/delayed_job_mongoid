@@ -4,12 +4,12 @@ gem 'rake'
 
 group :test do
   gem 'backports'
-  gem 'coveralls'
   gem 'mime-types', '~> 1.25', platforms: %i[jruby ruby_18]
   gem 'rest-client', '~> 1.6.0', platforms: %i[jruby ruby_18]
   gem 'rspec', '>= 3'
   gem 'rubocop', '0.65.0'
   gem 'simplecov', '>= 1'
+  gem 'simplecov-lcov'
 end
 
 case version = ENV['MONGOID_VERSION'] || '~> 7.0'
