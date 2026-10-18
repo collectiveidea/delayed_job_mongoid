@@ -2,26 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
 ### Added
 
 - `MongoSilencer` plugin to silence Delayed Job polling. ([#89], [@johnnyshields])
-- Support for Mongoid 8 and 9.
-- Support for Ruby 3.4 and 4.0.
 
 ### Changed
 
 - Extract the backend into a mixin to enable better backend customization. ([#88], [@johnnyshields])
 - Optimize the job reservation query by combining two `$or` branches into one. ([#90], [@johnnyshields])
-
-### Removed
-
-- **Breaking:** Support for Ruby versions older than 3.2.
-- **Breaking:** Support for Mongoid versions older than 7.
-- Support for the Syck YAML parser.
 
 ## [3.0.0] - 2021-09-20
 
