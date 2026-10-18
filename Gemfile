@@ -4,6 +4,7 @@ gem 'rake'
 
 group :test do
   gem 'rspec', '>= 3'
+  gem 'rubocop', '0.65.0'
   gem 'simplecov', '>= 1.2', require: false
   gem 'simplecov-lcov', require: false
 end
@@ -14,10 +15,6 @@ gem 'base64'
 gem 'bigdecimal'
 gem 'mutex_m'
 gem 'ostruct'
-
-group :rubocop do
-  gem 'rubocop', '~> 1.88'
-end
 
 mongoid_version = ENV.fetch('MONGOID_VERSION', nil)
 if mongoid_version == 'HEAD'
