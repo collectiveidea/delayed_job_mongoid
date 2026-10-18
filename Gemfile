@@ -4,6 +4,8 @@ gem 'rake'
 
 group :test do
   gem 'backports'
+  # ActiveSupport < 7.1 relies on concurrent-ruby < 1.3.5 to load logger
+  gem 'concurrent-ruby', '< 1.3.5'
   gem 'mime-types', '~> 1.25', platforms: %i[jruby ruby_18]
   gem 'rest-client', '~> 1.6.0', platforms: %i[jruby ruby_18]
   gem 'rspec', '>= 3'
