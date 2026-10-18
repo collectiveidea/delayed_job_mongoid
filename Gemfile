@@ -8,8 +8,13 @@ group :test do
   gem 'rest-client', '~> 1.6.0', platforms: %i[jruby ruby_18]
   gem 'rspec', '>= 3'
   gem 'rubocop', '0.65.0'
-  gem 'simplecov', '>= 1'
-  gem 'simplecov-lcov'
+  gem 'simplecov', '>= 0.9'
+  if /\A2\.[12]\./ =~ RUBY_VERSION
+    # 0.8.0 needs simplecov >= 0.18, which these Rubies can't run
+    gem 'simplecov-lcov', '< 0.8.0'
+  else
+    gem 'simplecov-lcov'
+  end
 end
 
 case version = ENV['MONGOID_VERSION'] || '~> 7.0'

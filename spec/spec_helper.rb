@@ -11,7 +11,7 @@ unless defined?(JRUBY_VERSION)
     SimpleCov::Formatter::LcovFormatter
   ]
   SimpleCov.start do
-    skip '/spec/'
+    add_filter '/spec/'
     minimum_coverage(76.39)
   end
 end
