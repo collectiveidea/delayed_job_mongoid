@@ -3,25 +3,34 @@ source 'https://rubygems.org'
 gem 'rake'
 
 group :test do
+  gem 'backports'
+  gem 'mime-types', '~> 1.25', platforms: %i[jruby ruby_18]
+  gem 'rest-client', '~> 1.6.0', platforms: %i[jruby ruby_18]
   gem 'rspec', '>= 3'
   gem 'rubocop', '0.65.0'
   gem 'simplecov', '>= 1'
   gem 'simplecov-lcov'
 end
 
-# Former default gems that Mongoid 7 and 8 (and the ActiveSupport 7.0
-# that Mongoid 7 resolves to) use without depending on them
-gem 'base64'
-gem 'bigdecimal'
-gem 'mutex_m'
-gem 'ostruct'
-
-mongoid_version = ENV.fetch('MONGOID_VERSION', nil)
-if mongoid_version == 'HEAD'
+case version = ENV['MONGOID_VERSION'] || '~> 7.0'
+when 'HEAD'
   gem 'mongoid', github: 'mongodb/mongoid'
-elsif mongoid_version
-  # '9' selects the newest 9.x and '9.0' the newest 9.0.x
-  gem 'mongoid', "~> #{mongoid_version}.0"
+when '7'
+  gem 'mongoid', '~> 7.3'
+when '7.3'
+  gem 'mongoid', '~> 7.3.0'
+when '7.2'
+  gem 'mongoid', '~> 7.2.0'
+when '7.1'
+  gem 'mongoid', '~> 7.1.0'
+when '7.0'
+  gem 'mongoid', '~> 7.0.0'
+when '6'
+  gem 'mongoid', '~> 6.0'
+when '5'
+  gem 'mongoid', '~> 5.0'
+else
+  gem 'mongoid', version
 end
 
 gemspec
