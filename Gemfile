@@ -5,8 +5,8 @@ gem 'rake'
 group :test do
   gem 'rspec', '>= 3'
   gem 'rubocop', '0.65.0'
-  gem 'simplecov', '>= 1.2', require: false
-  gem 'simplecov-lcov', require: false
+  gem 'simplecov', '>= 1'
+  gem 'simplecov-lcov'
 end
 
 # Former default gems that Mongoid 7 and 8 (and the ActiveSupport 7.0
